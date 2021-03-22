@@ -8,11 +8,15 @@ export class TodoService {
     create(todo: Todo): void {
         const currentMaxId = Math.max(...this.storage.map((t: Todo) => t.id));
         todo.id = currentMaxId >= 0 ? currentMaxId + 1 : 0;
+        todo.date = new Date();
         this.storage.push(todo);
     }
 
-    findAll(): Todo[] {
-        return this.storage;
+    findAll(): any {
+        return {
+            date: new Date(),
+            data: this.storage
+        };
     }
 
     findOne(id: number): Todo {
